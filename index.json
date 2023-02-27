@@ -1,0 +1,170 @@
+[
+    {
+        "id": "1597ebcce21fccf3",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a0d7231cd6d3061c",
+        "type": "ui_switch",
+        "z": "1597ebcce21fccf3",
+        "name": "",
+        "label": "switch",
+        "tooltip": "",
+        "group": "063cf867fddab606",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "8e8ba63a89732d67"
+            ]
+        ]
+    },
+    {
+        "id": "8e8ba63a89732d67",
+        "type": "function",
+        "z": "1597ebcce21fccf3",
+        "name": "Controler le led",
+        "func": "Etat = msg.payload\nif (Etat === true) {\n    var msg1 = { payload: \"ON\" }\n    return [msg1]\n}\nelse if (Etat === false) {\n    var msg2 = { payload: \"OFF\" }\n    return [msg2]\n}\nreturn msg;\n\n\n",
+        "outputs": 1,
+        "noerr": 3,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 320,
+        "wires": [
+            [
+                "9b9d0d66b974becb",
+                "88ea892153f79d0d",
+                "ed224a2aebdc72b5"
+            ]
+        ]
+    },
+    {
+        "id": "9b9d0d66b974becb",
+        "type": "serial out",
+        "z": "1597ebcce21fccf3",
+        "name": "Port serial ",
+        "serial": "3308353109b75939",
+        "x": 600,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "ed224a2aebdc72b5",
+        "type": "function",
+        "z": "1597ebcce21fccf3",
+        "name": "function 3",
+        "func": "msg.valeur = msg.payload\nmsg.topic = \"insert INTO data(data) VALUES(' + msg.valeur + ');\"\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 440,
+        "wires": [
+            [
+                "8b0c138028f983c8"
+            ]
+        ]
+    },
+    {
+        "id": "88ea892153f79d0d",
+        "type": "debug",
+        "z": "1597ebcce21fccf3",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "8b0c138028f983c8",
+        "type": "mysql",
+        "z": "1597ebcce21fccf3",
+        "mydb": "8cbb791484a7546c",
+        "name": "",
+        "x": 670,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "063cf867fddab606",
+        "type": "ui_group",
+        "name": "Taher",
+        "tab": "9d2520c907827fd0",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3308353109b75939",
+        "type": "serial-port",
+        "serialport": "COM1",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "8cbb791484a7546c",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "mysql-taher.alwaysdata.net",
+        "port": "3306",
+        "db": "taher_aziz",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "9d2520c907827fd0",
+        "type": "ui_tab",
+        "name": "Mahamat",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
